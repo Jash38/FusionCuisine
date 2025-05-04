@@ -48,7 +48,7 @@ export default function Home() {
       )}
 
       <RecipeItems />
-      <Footer />
+  
     </>
   );
 }
