@@ -21,19 +21,70 @@ export default function InputForm({setIsOpen}) {
 
   return (
     <>
-        <form className='form' onSubmit={handleOnSubmit}>
-            <div className='form-control'>
-                <label>Email</label>
-                <input type="email" className='input' onChange={(e)=>setEmail(e.target.value)} required></input>
-            </div>
-            <div className='form-control'>
-                <label>Password</label>
-                <input type="password" className='input' onChange={(e)=>setPassword(e.target.value)} required></input>
-            </div>
-            <button type='submit'>{(isSignUp) ? "Sign Up": "Login"}</button><br></br>
-          { (error!="") && <h6 className='error'>{error}</h6>}<br></br>
-            <p onClick={()=>setIsSignUp(pre=>!pre)}>{(isSignUp) ? "Already have an account": "Create new account"}</p>
-        </form>
+        <form
+  className='form'
+  onSubmit={handleOnSubmit}
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '1rem',
+    minWidth: '300px',
+    width: '100%',
+  }}
+>
+  <div style={{ width: '100%' }}>
+    <label style={{ display: 'block', marginBottom: '0.3rem' }}>Email</label>
+    <input
+      type="email"
+      className='input'
+      onChange={(e) => setEmail(e.target.value)}
+      required
+      style={{ width: '100%', padding: '0.5rem', borderRadius: '6px', border: '1px solid #888' }}
+    />
+  </div>
+
+  <div style={{ width: '100%' }}>
+    <label style={{ display: 'block', marginBottom: '0.3rem' }}>Password</label>
+    <input
+      type="password"
+      className='input'
+      onChange={(e) => setPassword(e.target.value)}
+      required
+      style={{ width: '100%', padding: '0.5rem', borderRadius: '6px', border: '1px solid #888' }}
+    />
+  </div>
+
+  <button
+    type='submit'
+    style={{
+      backgroundColor: '#ff5e00',
+      color: 'white',
+      padding: '0.6rem 1.2rem',
+      border: 'none',
+      borderRadius: '5px',
+      fontWeight: '500',
+      cursor: 'pointer',
+      width: '100%'
+    }}
+  >
+    {isSignUp ? "Sign Up" : "Login"}
+  </button>
+
+  {error && <h6 className='error' style={{ color: 'red' }}>{error}</h6>}
+
+  <p
+    onClick={() => setIsSignUp(pre => !pre)}
+    style={{
+      color: '#ff5e00',
+      textAlign: 'center',
+      cursor: 'pointer',
+      marginTop: '0.5rem'
+    }}
+  >
+    {isSignUp ? "Already have an account?" : "Create new account"}
+  </p>
+</form>
     </>
   )
 }

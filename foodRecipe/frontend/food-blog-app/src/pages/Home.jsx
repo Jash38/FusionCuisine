@@ -28,9 +28,10 @@ export default function Home() {
           <div className="text-content">
             <h1>Welcome to Fusion Cuisine</h1>
             <p>
-              Discover and share unique recipes from around the world. Whether you're
-              looking for comfort food or cultural specialties, Fusion Cuisine connects
-              you with global flavors.
+            Discover a world of flavor with Fusion Cuisine — a vibrant web platform where food lovers explore, 
+            share, and celebrate authentic recipes from diverse cultures. Whether you are searching for traditional dishes, 
+            fusion creations, or meals that fit specific dietary needs like vegan or allergy-friendly options, 
+            our platform makes it easy to find recipes that suit your taste. Join a global community passionate about food and start your culinary journey today.
             </p>
             <button onClick={addRecipe}>Share Your Recipe</button>
           </div>
