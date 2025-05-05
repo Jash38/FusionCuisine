@@ -19,6 +19,10 @@ const recipeSchema=mongoose.Schema({
     coverImage:{
         type:String,
     },
+    tags: {
+        type: [String],
+        default: []
+    },
     createdBy:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
