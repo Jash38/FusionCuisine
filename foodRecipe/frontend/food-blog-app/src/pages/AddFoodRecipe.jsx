@@ -1,52 +1,88 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function AddFoodRecipe() {
     const [recipeData, setRecipeData] = useState({})
+    const [slideIn, setSlideIn] = useState(false)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        // Trigger animation after component mounts
+        setTimeout(() => setSlideIn(true), 50)
+    }, [])
+
     const onHandleChange = (e) => {
-        let val = (e.target.name === "ingredients") ? e.target.value.split(",") : (e.target.name === "file") ? e.target.files[0] : e.target.value
+        let val = (e.target.name === "ingredients") ? e.target.value.split(",") :
+            (e.target.name === "file") ? e.target.files[0] : e.target.value
         setRecipeData(pre => ({ ...pre, [e.target.name]: val }))
     }
+
     const onHandleSubmit = async (e) => {
         e.preventDefault()
-        console.log(recipeData)
-        await axios.post("http://localhost:5000/recipe", recipeData,{
-            headers:{
-                'Content-Type':'multipart/form-data',
-                'authorization':'bearer '+localStorage.getItem("token")
+        await axios.post("http://localhost:5000/recipe", recipeData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'authorization': 'bearer ' + localStorage.getItem("token")
             }
-        })
-            .then(() => navigate("/"))
+        }).then(() => navigate("/"))
     }
+
     return (
-        <>
-            <div className='container'>
-                <form className='form' onSubmit={onHandleSubmit}>
-                    <div className='form-control'>
-                        <label>Title</label>
-                        <input type="text" className='input' name="title" onChange={onHandleChange}></input>
-                    </div>
-                    <div className='form-control'>
-                        <label>Time</label>
-                        <input type="text" className='input' name="time" onChange={onHandleChange}></input>
-                    </div>
-                    <div className='form-control'>
-                        <label>Ingredients</label>
-                        <textarea type="text" className='input-textarea' name="ingredients" rows="5" onChange={onHandleChange}></textarea>
-                    </div>
-                    <div className='form-control'>
-                        <label>Instructions</label>
-                        <textarea type="text" className='input-textarea' name="instructions" rows="5" onChange={onHandleChange}></textarea>
-                    </div>
-                    <div className='form-control'>
-                        <label>Recipe Image</label>
-                        <input type="file" className='input' name="file" onChange={onHandleChange}></input>
-                    </div>
-                    <button type="submit">Add Recipe</button>
-                </form>
-            </div>
-        </>
+        <div className={`add-recipe-container ${slideIn ? 'slide-in' : ''}`}>
+            <h2>Add New Recipe</h2>
+            <form onSubmit={onHandleSubmit}>
+                <div>
+                    <label htmlFor="title">Title</label>
+                    <input
+                        type="text"
+                        name="title"
+                        onChange={onHandleChange}
+                        placeholder="Enter recipe title"
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="time">Time</label>
+                    <input
+                        type="text"
+                        name="time"
+                        onChange={onHandleChange}
+                        placeholder="e.g. 30 mins"
+                    />
+                </div>
+                <div>
+                    <label htmlFor="ingredients">Ingredients (comma-separated)</label>
+                    <textarea
+                        name="ingredients"
+                        onChange={onHandleChange}
+                        rows="4"
+                        placeholder="e.g. rice, chicken, spices"
+                        required
+                    ></textarea>
+                </div>
+                <div>
+                    <label htmlFor="instructions">Instructions</label>
+                    <textarea
+                        name="instructions"
+                        onChange={onHandleChange}
+                        rows="5"
+                        placeholder="Write the recipe steps here..."
+                        required
+                    ></textarea>
+                </div>
+                <div>
+                    <label htmlFor="file">Recipe Image</label>
+                    <input
+                        type="file"
+                        name="file"
+                        accept="image/*"
+                        onChange={onHandleChange}
+                        required
+                    />
+                </div>
+                <button type="submit">Add Recipe</button>
+            </form>
+        </div>
     )
 }

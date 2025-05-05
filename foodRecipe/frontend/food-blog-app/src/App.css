@@ -235,14 +235,33 @@ header ul li p:hover {
   margin-bottom: 1rem;
 }
 /*-------------------------------------------------------*/
+/* Slide-in Animation */
+@keyframes slideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in {
+  animation: slideFromLeft 0.6s ease-out forwards;
+}
+
+/* Already mostly present, just ensure this is complete */
 .add-recipe-container {
   max-width: 600px;
-  margin: 5rem auto 3rem auto;
-  padding: 2rem;
+  margin: 6rem auto 3rem auto;
+  padding: 2.5rem;
   background-color: #1b1b1b;
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(255, 94, 0, 0.15);
   color: #f0f0f0;
+  opacity: 0; /* Hidden by default, shown via .slide-in */
+  transform: translateX(-80px);
 }
 
 .add-recipe-container h2 {
@@ -254,11 +273,11 @@ header ul li p:hover {
 .add-recipe-container form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.4rem;
 }
 
 .add-recipe-container label {
-  font-weight: bold;
+  font-weight: 500;
   margin-bottom: 0.3rem;
   color: #ccc;
 }
@@ -272,11 +291,11 @@ header ul li p:hover {
   border: 1px solid #444;
   border-radius: 6px;
   font-size: 1rem;
+  width: 100%;
 }
 
 .add-recipe-container textarea {
   resize: vertical;
-  min-height: 100px;
 }
 
 .add-recipe-container button {
