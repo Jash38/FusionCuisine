@@ -336,3 +336,12 @@ header ul li p:hover {
   z-index: 1100;
   min-width: 300px;
 }
+
+.card-body ul {
+  padding-left: 1rem;
+  margin-top: 0.3rem;
+}
+
+.card-body p {
+  margin-top: 0.2rem;
+}
